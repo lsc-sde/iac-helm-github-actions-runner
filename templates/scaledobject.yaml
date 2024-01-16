@@ -10,7 +10,7 @@ spec:
   triggers:
   - type: github-runner
     metadata:
-      githubAPIURL: {{ include "github-actions-runner.repourl" . }}
+      githubAPIURL: {{ .Values.github.api.url }}
       owner: {{ .Values.github.org }}
       runnerScope: {{ .Values.runner.scope }}
       repos: {{.Values.github.repository }}

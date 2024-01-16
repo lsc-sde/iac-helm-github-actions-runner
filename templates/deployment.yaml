@@ -42,7 +42,7 @@ spec:
 
         {{ if eq .Values.runner.scope "repo" }}
         - name: REPO_URL
-          value: {{ .Values.github.repository }}
+          value: {{ include "github-actions-runner.repourl" . }}
         {{ end }}
 
         {{ if eq .Values.runner.scope "enterprise" }}
