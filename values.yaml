@@ -10,7 +10,10 @@ runner:
   scope: repo
   group: github-actions-runner-k8s
   labels: testLabel
-
+  replicas:
+    minimum: 1
+    maximum: 5
+    
   resources:
     limits:
       cpu: 2

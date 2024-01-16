@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}
 spec:
-  replicas: 0
+  replicas: {{ .Values.runner.replicas.minimum }}
   selector:
     matchLabels:
       app: {{ .Release.Name }}

@@ -5,8 +5,8 @@ metadata:
 spec:
   scaleTargetRef:
     name: {{ .Release.Name }}
-  minReplicaCount: 0
-  maxReplicaCount: 5
+  minReplicaCount: {{ .Values.runner.replicas.minimum }}
+  maxReplicaCount: {{ .Values.runner.replicas.maximum }}
   triggers:
   - type: github-runner
     metadata:
