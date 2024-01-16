@@ -1,0 +1,9 @@
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  secretTargetRef:
+    - parameter: personalAccessToken
+      name: {{ .Values.accessToken.secretName }}
+      key: {{ .Values.accessToken.secretKey }}

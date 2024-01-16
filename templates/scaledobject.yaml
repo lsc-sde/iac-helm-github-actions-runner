@@ -1,0 +1,20 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  scaleTargetRef:
+    name: {{ .Release.Name }}
+  minReplicaCount: 0
+  maxReplicaCount: 5
+  triggers:
+  - type: github-runner
+    metadata:
+      githubAPIURL: {{ include "github-actions-runner.repourl" . }}
+      owner: {{ .Values.github.org }}
+      runnerScope: {{ .Values.runner.scope }}
+      repos: {{.Values.github.repository }}
+      labels: {{ .Values.runner.labels }}
+      targetWorkflowQueueLength: "1"
+    authenticationRef:
+     name: {{ .Release.Name }}

@@ -1,0 +1,25 @@
+github:
+  url: https://github.com
+  org: lsc-sde
+  repository: iac-helm-github-actions-runner
+  enterpriseName: lsc-sde
+  api:
+    url: "https://api.github.com"
+
+runner:
+  scope: repo
+  group: github-actions-runner-k8s
+  labels: testLabel
+
+  resources:
+    limits:
+      cpu: 2
+      memory: 512Mi
+    
+    requests:
+      cpu: 2
+      memory: 256Mi
+
+accessToken:
+  secretName: testSecret
+  secretKey: testSecretKey
