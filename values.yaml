@@ -13,7 +13,7 @@ runner:
   replicas:
     minimum: 1
     maximum: 5
-    
+
   resources:
     limits:
       cpu: 2
@@ -23,6 +23,10 @@ runner:
       cpu: 2
       memory: 256Mi
 
+  affinity: {}
+
 accessToken:
   secretName: testSecret
   secretKey: testSecretKey
+
+  
