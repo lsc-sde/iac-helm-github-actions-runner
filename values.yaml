@@ -23,7 +23,7 @@ runner:
       cpu: 2
       memory: 256Mi
 
-  affinity: {}
+  nodeSelector: {}
 
 accessToken:
   secretName: testSecret

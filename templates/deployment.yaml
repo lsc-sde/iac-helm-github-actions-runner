@@ -14,8 +14,8 @@ spec:
         app: {{ .Release.Name }}
         app-type: actions-runner
     spec:
-      affinity:
-        {{- toYaml .Values.runner.affinity | nindent 8 }}
+      nodeSelector:
+        {{- toYaml .Values.runner.nodeSelector | nindent 8 }}
         
       volumes:
       - name: containerdsock
