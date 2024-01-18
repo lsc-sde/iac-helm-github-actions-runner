@@ -15,7 +15,7 @@ spec:
         app-type: actions-runner
     spec:
       affinity:
-        {{- toYaml .Values.runner.resources | nindent 8 }}
+        {{- toYaml .Values.runner.affinity | nindent 8 }}
         
       volumes:
       - name: containerdsock
