@@ -16,6 +16,8 @@ spec:
     spec:
       nodeSelector:
         {{- toYaml .Values.runner.nodeSelector | nindent 8 }}
+      tolerations:
+        {{- toYaml .Values.runner.tolerations | nindent 8 }}
         
       volumes:
       - name: containerdsock

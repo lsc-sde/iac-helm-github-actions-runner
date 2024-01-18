@@ -24,6 +24,7 @@ runner:
       memory: 256Mi
 
   nodeSelector: {}
+  tolerations: {}
 
 accessToken:
   secretName: testSecret
