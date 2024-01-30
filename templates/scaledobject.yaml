@@ -12,7 +12,7 @@ spec:
     metadata:
       githubAPIURL: {{ .Values.github.api.url }}
       owner: {{ .Values.github.org }}
-      runnerScope: {{ .Values.runner.scope }}
+      runnerScope: {{ .Values.github.scope }}
       repos: {{.Values.github.repository }}
       labels: {{ .Values.runner.labels }}
       targetWorkflowQueueLength: "1"
