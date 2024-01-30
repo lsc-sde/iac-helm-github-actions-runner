@@ -35,16 +35,33 @@ spec:
       {{ end }}
 
       containers:
+      - name: dind-daemon
+        image: docker:23.0.5-dind
+        command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
+        securityContext:
+          privileged: true
+        volumeMounts:
+          - name: workdir
+            mountPath: /var/lib/docker
+
       - name: runner
         image: myoung34/github-runner:latest
         env:
         - name: START_DOCKER_SERVICE
-          value: "true"
+          value: "false"
+        
+        - name: DOCKER_HOST
+          value: tcp://localhost:2375
+        
+        - name: DOCKER_API_VERSION
+          value: "1.42"
+        
         - name: ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               name: {{ .Values.accessToken.secretName }}
               key: {{ .Values.accessToken.secretKey }}
+        
         - name: RUNNER_SCOPE
           value: {{ .Values.github.scope }}
           
@@ -83,16 +100,13 @@ spec:
         volumeMounts:
         - name: containerdsock
           mountPath: /run/containerd/containerd.sock
-
-        - name: workdir
-          mountPath: {{ include "github-actions-runner.workdir" . }}
           
         {{ if .Values.runner.extraVolumeMounts }}
         {{ toYaml .Values.runner.extraVolumeMounts | nindent 8 }}
         {{ end }}
           
-        securityContext:
-          privileged: true # Required if you're enabling docker
+        #securityContext:
+        #  privileged: true # Required if you're enabling docker
         
         resources:
           {{- toYaml .Values.runner.resources | nindent 10 }}
