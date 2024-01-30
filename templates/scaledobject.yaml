@@ -13,7 +13,9 @@ spec:
       githubAPIURL: {{ .Values.github.api.url }}
       owner: {{ .Values.github.org }}
       runnerScope: {{ .Values.github.scope }}
+      {{ if eq .Values.github.scope "repo" }}
       repos: {{.Values.github.repository }}
+      {{ end }}
       labels: {{ .Values.runner.labels }}
       targetWorkflowQueueLength: "1"
     authenticationRef:

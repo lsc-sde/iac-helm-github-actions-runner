@@ -46,14 +46,14 @@ spec:
               name: {{ .Values.accessToken.secretName }}
               key: {{ .Values.accessToken.secretKey }}
         - name: RUNNER_SCOPE
-          value: {{ .Values.runner.scope }}
+          value: {{ .Values.github.scope }}
           
-        {{ if eq .Values.runner.scope "org" }}
+        {{ if eq .Values.github.scope "org" }}
         - name: ORG_NAME
           value: {{ .Values.github.org }}
         {{ end }}
 
-        {{ if eq .Values.runner.scope "repo" }}
+        {{ if eq .Values.github.scope "repo" }}
         - name: REPO_URL
           value: {{ include "github-actions-runner.repourl" . }}
         {{ end }}
