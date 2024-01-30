@@ -8,6 +8,7 @@ github:
     url: "https://api.github.com"
 
 runner:
+  image: myoung34/github-runner:latest
   group: github-actions-runner-k8s
   labels: testLabel
   replicas:
@@ -24,6 +25,9 @@ runner:
   workVolume: []
   extraVolumes: []
   extraVolumeMounts: []
+
+dind-daemon:
+  image: docker:25.0.1-dind
 
 accessToken:
   secretName: testSecret

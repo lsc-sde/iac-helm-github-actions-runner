@@ -36,7 +36,7 @@ spec:
 
       containers:
       - name: dind-daemon
-        image: docker:23.0.5-dind
+        image: {{ .Values.dind-daemon.image }}
         command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
         securityContext:
           privileged: true
@@ -45,7 +45,7 @@ spec:
             mountPath: /var/lib/docker
 
       - name: runner
-        image: myoung34/github-runner:latest
+        image: {{ .Values.runner.image }}
         env:
         - name: START_DOCKER_SERVICE
           value: "false"
