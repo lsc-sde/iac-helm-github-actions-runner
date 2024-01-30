@@ -78,7 +78,7 @@ spec:
           value: {{ include "github-actions-runner.workdir" . }}
 
         - name: RUNNER_GROUP
-          value: {{ .Values.runnerGroup }}
+          value: {{ .Values.runner.group }}
         
         volumeMounts:
         - name: containerdsock
