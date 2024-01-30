@@ -87,7 +87,7 @@ spec:
           mountPath: /run/containerd/containerd.sock
 
         - name: workdir
-          mountPath: /tmp
+          mountPath: {{ include "github-actions-runner.workdir" . }}
           
         {{ if .Values.runner.extraVolumeMounts }}
         {{ toYaml .Values.runner.extraVolumeMounts | nindent 8 }}
