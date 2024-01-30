@@ -23,9 +23,17 @@ spec:
       - name: containerdsock
         hostPath:
           path: /run/containerd/containerd.sock
+      {{ if .Values.runner.workVolume }}
+      {{ toYaml .Values.runner.workVolume | nindent 6 }}
+      {{ else }}
       - name: workdir
         hostPath:
-          path: /tmp/github-runner-your-repo
+          path: {{ include "github-actions-runner.workdir" . }}
+      {{ end }}
+      {{ if .Values.runner.extraVolumes }}
+      {{ toYaml .Values.runner.extraVolumes | nindent 6 }}
+      {{ end }}
+
       containers:
       - name: runner
         image: myoung34/github-runner:latest
@@ -67,7 +75,7 @@ spec:
               fieldPath: metadata.name
 
         - name: RUNNER_WORKDIR
-          value: /tmp/github-runner-your-repo
+          value: {{ include "github-actions-runner.workdir" . }}
 
         - name: RUNNER_GROUP
           value: {{ .Values.runnerGroup }}
@@ -77,8 +85,12 @@ spec:
           mountPath: /run/containerd/containerd.sock
 
         - name: workdir
-          mountPath: /tmp/github-runner-your-repo
-        
+          mountPath: {{ include "github-actions-runner.workdir" . }}
+          
+        {{ if .Values.runner.extraVolumeMounts }}
+        {{ toYaml .Values.runner.extraVolumeMounts | nindent 8 }}
+        {{ end }}
+          
         securityContext:
           privileged: true # Required if you're enabling docker
         

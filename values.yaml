@@ -15,16 +15,15 @@ runner:
     maximum: 5
 
   resources:
-    limits:
-      cpu: 2
-      memory: 512Mi
-    
     requests:
       cpu: 2
       memory: 256Mi
 
   nodeSelector: {}
   tolerations: {}
+  workVolume: []
+  extraVolumes: []
+  extraVolumeMounts: []
 
 accessToken:
   secretName: testSecret
