@@ -35,14 +35,14 @@ spec:
       {{ end }}
 
       containers:
-      - name: dind-daemon
-        image: {{ .Values.dind.image }}
-        command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
-        securityContext:
-          privileged: true
-        volumeMounts:
-          - name: workdir
-            mountPath: /var/lib/docker
+      #- name: dind-daemon
+      #  image: {{ .Values.dind.image }}
+      #  command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
+      #  securityContext:
+      #    privileged: true
+      #  volumeMounts:
+      #    - name: workdir
+      #      mountPath: /var/lib/docker
 
       - name: runner
         image: {{ .Values.runner.image }}
@@ -50,11 +50,11 @@ spec:
         - name: START_DOCKER_SERVICE
           value: "false"
         
-        - name: DOCKER_HOST
-          value: tcp://localhost:2375
+        #- name: DOCKER_HOST
+        #  value: tcp://localhost:2375
         
-        - name: DOCKER_API_VERSION
-          value: "1.42"
+        #- name: DOCKER_API_VERSION
+        #  value: "1.42"
         
         - name: ACCESS_TOKEN
           valueFrom:
@@ -100,13 +100,16 @@ spec:
         volumeMounts:
         - name: containerdsock
           mountPath: /run/containerd/containerd.sock
+
+        - name: workdir
+          mountPath: /tmp
           
         {{ if .Values.runner.extraVolumeMounts }}
         {{ toYaml .Values.runner.extraVolumeMounts | nindent 8 }}
         {{ end }}
           
-        #securityContext:
-        #  privileged: true # Required if you're enabling docker
+        securityContext:
+          privileged: true # Required to enable img
         
         resources:
           {{- toYaml .Values.runner.resources | nindent 10 }}

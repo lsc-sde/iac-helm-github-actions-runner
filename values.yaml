@@ -26,8 +26,8 @@ runner:
   extraVolumes: []
   extraVolumeMounts: []
 
-dind:
-  image: docker:25.0.1-dind
+#dind:
+#  image: docker:25.0.1-dind
 
 accessToken:
   secretName: testSecret
