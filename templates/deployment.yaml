@@ -35,26 +35,11 @@ spec:
       {{ end }}
 
       containers:
-      #- name: dind-daemon
-      #  image: {{ .Values.dind.image }}
-      #  command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
-      #  securityContext:
-      #    privileged: true
-      #  volumeMounts:
-      #    - name: workdir
-      #      mountPath: /var/lib/docker
-
       - name: runner
         image: {{ .Values.runner.image }}
         env:
         - name: START_DOCKER_SERVICE
           value: "false"
-        
-        #- name: DOCKER_HOST
-        #  value: tcp://localhost:2375
-        
-        #- name: DOCKER_API_VERSION
-        #  value: "1.42"
         
         - name: ACCESS_TOKEN
           valueFrom:
