@@ -9,5 +9,5 @@ Create chart name and version as used by the chart label.
 Get the working directory.
 */}}
 {{- define "github-actions-runner.workdir" -}}
-{{- printf "/tmp/github-runner-%s" .Values.github.repository }}
+{{- printf "/tmp/github-runner-%s" .Values.github.org }}
 {{- end }}
