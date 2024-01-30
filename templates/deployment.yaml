@@ -36,7 +36,7 @@ spec:
 
       containers:
       - name: dind-daemon
-        image: {{ .Values.dind-daemon.image }}
+        image: {{ .Values.dind.image }}
         command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
         securityContext:
           privileged: true

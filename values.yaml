@@ -26,7 +26,7 @@ runner:
   extraVolumes: []
   extraVolumeMounts: []
 
-dind-daemon:
+dind:
   image: docker:25.0.1-dind
 
 accessToken:
