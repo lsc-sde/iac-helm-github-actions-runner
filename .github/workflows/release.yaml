@@ -11,5 +11,5 @@ jobs:
     uses: lsc-sde/lsc-sde/.github/workflows/helm-release.yaml@main
     with:
       directory: iac/helm/github-actions-runner
-      yamlPath: github_runner_chart_version
+      yamlPath: github_runner
     secrets: inherit
